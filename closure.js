@@ -55,8 +55,42 @@ setWidth()*/
     function displayName() {
       console.log(name);
     }
-    return displayName;
+    return displayName;//inner-function being returned..
   }
   
   const myFunc = makeFunc();
   myFunc();//myFunc is a refrence to the  displayName funciton that is created when the makeFunc is run..
+  // displayName and the variable name from the lexical environment of the outer function makeFunc,forms the closure here..
+
+  // Small exapmle demonstrating lexical environment
+
+  function outerFunction() {
+    var outerVariable = 'outer';
+
+    function innerFunction() {
+        // Access outerVariable from the lexical environment of innerFunction
+        console.log('Inner function accessing outerVariable:', outerVariable);
+    }
+
+    // Call innerFunction
+    innerFunction();
+}
+
+// Call outerFunction
+outerFunction();
+
+function makeAdder(x) {
+    return function (y) {
+      return x + y;
+    };
+  }
+  
+  const add = makeAdder(5);
+  const add10 = makeAdder(10);
+  
+  console.log(add(2)); // 7
+  console.log(add10(2)); // 12
+
+
+//In this example, innerFunction is defined within the lexical environment of outerFunction, which means it has access to the variables defined in outerFunction. When innerFunction is called inside outerFunction, it can access and utilize the variable outerVariable from the outer scope.
+
